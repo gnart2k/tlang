@@ -1,0 +1,27 @@
+[
+  {
+    "id": "1",
+    "answer": "answer 1",
+    "question_id": "1"
+  },
+  {
+    "id": "2",
+    "answer": "answer 2",
+    "question_id": "1"
+  },
+  {
+    "id": "3",
+    "answer": "answer 3",
+    "question_id": "1"
+  },
+  {
+    "id": "4",
+    "answer": "answer 4",
+    "question_id": "1"
+  },
+  {
+    "id": "5",
+    "answer": "answer 5",
+    "question_id": "2"
+  }
+]

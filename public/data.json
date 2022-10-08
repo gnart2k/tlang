@@ -1,0 +1,20 @@
+[
+  {
+    "id": "1",
+    "define": "duong",
+    "value": "du",
+    "quizSetId": "1"
+  },
+  {
+    "id": "2",
+    "define": "duong5",
+    "value": "du3",
+    "quizSetId": "1"
+  },
+  {
+    "id": "3",
+    "define": "duong2",
+    "value": "du4",
+    "quizSetId": "2"
+  }
+]
