@@ -16,6 +16,7 @@ export const fetchQuiz = async (quizset_id: string) => {
   const endpoint = "/quiz.json";
   const response = await axios.get(endpoint);
   const rs: QuestionState[] = response.data.map((quiz: Question) => ({
+    correct_answer: quiz.correct_answer,
     question: quiz.question,
     answers: shuffleArray([...quiz.incorrect_answer, quiz.correct_answer]),
   }));

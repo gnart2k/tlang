@@ -19,6 +19,10 @@ export default function FlashCard({}: Card): JSX.Element {
   const router = useRouter();
   const { fid } = router.query;
 
+  const [cardStyle, setCardStyle] = useState(
+    "w-[700px] cursor-pointer transition ease-in-out duration-500 "
+  );
+
   const [data, setData] = useState<Card[]>([]);
   useEffect(() => {
     const fetchData = async () => {
