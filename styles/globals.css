@@ -15,3 +15,50 @@
 .text-flip {
   transform: rotateX(180deg);
 }
+
+.rotate {
+  transform: rotateY(360deg);
+  transform-style: preserve-3d;
+}
+
+.fade {
+  animation-name: fade-animation;
+  animation-duration: 0.5s;
+}
+
+.fade_ {
+  animation-name: fade-animation_;
+  animation-duration: 0.5s;
+}
+
+@keyframes fade-animation_ {
+  0% {
+    transform: translateX(-100vw);
+  }
+}
+@keyframes fade-animation {
+  0% {
+    transform: translateX(100vw);
+  }
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+/* ::-webkit-scrollbar-track {
+  background: #f1f1f1;
+} */
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

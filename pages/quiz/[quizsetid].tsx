@@ -17,6 +17,7 @@ const Quiz = (): JSX.Element => {
   const [endQuiz, setEndQuiz] = useState(false);
   const [correct_number, setCorrect_number] = useState<number>(0);
   const ans = useRef<HTMLDivElement>(null);
+  const [progress, setProgress] = useState("");
   const [ansStyle, setAnsStyle] = useState<string>("");
 
   useEffect(() => {
@@ -29,6 +30,7 @@ const Quiz = (): JSX.Element => {
 
   useEffect(() => {
     setQuestion(questions[curIndex]);
+    setProgress(Math.round(((curIndex + 1) / questions.length) * 100) + "%");
   }, [curIndex, question, questions]);
 
   const handleClick = (e: HTMLDivElement) => {
@@ -55,7 +57,12 @@ const Quiz = (): JSX.Element => {
 
   return (
     <div>
-      {curIndex + 1}/ {questions.length}
+      <div className="w-full mt-6 mb-5 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+        <div
+          className="bg-blue-200 h-1 rounded-full "
+          style={{ width: progress }}
+        ></div>
+      </div>
       {endQuiz ? (
         // final result page
         <div className="w-[400px] h-[300px] m-auto mt-40 flex items-center flex-col justify-center bg-slate-600 text-bold text-4xl rounded-xl">

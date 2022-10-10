@@ -19,9 +19,11 @@ export default function FlashCard({}: Card): JSX.Element {
   const router = useRouter();
   const { fid } = router.query;
 
-  const [cardStyle, setCardStyle] = useState(
-    "w-[700px] cursor-pointer transition ease-in-out duration-500 "
+  const [cardStyle, setCardStyle] = useState<string | undefined>(
+    "transition ease-in-out duration-500 "
   );
+
+  const [slide, setSlide] = useState(false);
 
   const [data, setData] = useState<Card[]>([]);
   useEffect(() => {
@@ -30,7 +32,6 @@ export default function FlashCard({}: Card): JSX.Element {
       setData((prev) =>
         response.data.filter((item: Card) => item.quizSetId == fid)
       );
-      console.log(response.data.filter((item: Card) => item.quizSetId == fid));
     };
     fetchData();
   }, [fid]);
@@ -41,12 +42,16 @@ export default function FlashCard({}: Card): JSX.Element {
     setCurCard((prev) => data[curIndex]);
   }, [curIndex, data]);
 
-  const nextCard = () => {
+  const nextCard = (e: Event) => {
     setCurIndex((i) => i + 1);
     if (curIndex >= data.length - 1) {
       setCurIndex(0);
     }
-    console.log(data.length);
+
+    setSlide((prev) => true);
+    let temp = "transition ease-in-out duration-500";
+    setCardStyle((prev) => prev + " " + "fade_");
+    setTimeout(() => setCardStyle((prev) => temp), 500);
   };
 
   const prevCard = () => {
@@ -54,11 +59,16 @@ export default function FlashCard({}: Card): JSX.Element {
     if (curIndex <= 0) {
       setCurIndex(data.length - 1);
     }
+
+    setSlide((prev) => true);
+    let temp = "transition ease-in-out duration-500 ";
+    setCardStyle((prev) => prev + " " + "fade");
+    setTimeout(() => setCardStyle((prev) => temp), 500);
   };
 
   return (
     <div className="flex flex-col justify-center items-center h-screen">
-      <div>
+      <div className={cardStyle}>
         <Card
           key={curCard?.define}
           define={curCard?.define!}
@@ -71,7 +81,7 @@ export default function FlashCard({}: Card): JSX.Element {
       </div>
       {/* navigation */}
       <div className="flex">
-        <div className={styles.btn} onClick={nextCard}>
+        <div className={styles.btn} onClick={(e: any) => nextCard(e)}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
