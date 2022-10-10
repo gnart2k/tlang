@@ -33,21 +33,27 @@ const Quiz = (): JSX.Element => {
     setProgress(Math.round(((curIndex + 1) / questions.length) * 100) + "%");
   }, [curIndex, question, questions]);
 
-  const handleClick = (e: HTMLDivElement) => {
+  const handleClick = (e: MouseEvent) => {
+    const { target } = e;
     if (curIndex < questions.length - 1) {
       setTimeout(() => setIndex((prev) => prev + 1), 700);
     } else {
       setEndQuiz(true);
     }
-
-    if (e.target.innerHTML == question?.correct_answer) {
-      setCorrect_number((prev) => prev + 1);
-      e.target.style.backgroundColor = "green";
-    } else {
-      e.target.style.backgroundColor = "red";
+    if (target == null) {
     }
-    console.log(e.target.style);
-    setTimeout(() => (e.target.style.backgroundColor = "rgb(71,85,104)"), 500);
+    if ((target as HTMLButtonElement).innerHTML == question?.correct_answer) {
+      setCorrect_number((prev) => prev + 1);
+      (target as HTMLButtonElement).style.backgroundColor = "green";
+    } else {
+      (target as HTMLButtonElement).style.backgroundColor = "red";
+    }
+    setTimeout(
+      () =>
+        ((target as HTMLButtonElement).style.backgroundColor =
+          "rgb(71,85,104)"),
+      500
+    );
   };
 
   const handleRestart = () => {
