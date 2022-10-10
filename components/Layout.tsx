@@ -7,7 +7,7 @@ interface Props {
 
 const Layout = (props: Props) => {
   return (
-    <div className="overflow-x-hidden dark:bg-gray-900 dark:text-white h-screen w-screen">
+    <div className="overflow-x-hidden dark:bg-[rgb(17,17,17)] dark:text-white h-screen w-screen">
       <Header />
       {props.children}
     </div>

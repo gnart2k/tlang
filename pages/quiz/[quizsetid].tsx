@@ -44,9 +44,9 @@ const Quiz = (): JSX.Element => {
     }
     if ((target as HTMLButtonElement).innerHTML == question?.correct_answer) {
       setCorrect_number((prev) => prev + 1);
-      (target as HTMLButtonElement).style.backgroundColor = "green";
+      (target as HTMLButtonElement).style.backgroundColor = "rgb(34,191,80)";
     } else {
-      (target as HTMLButtonElement).style.backgroundColor = "red";
+      (target as HTMLButtonElement).style.backgroundColor = "rgb(253,48,56)";
     }
     setTimeout(
       () =>
@@ -59,11 +59,13 @@ const Quiz = (): JSX.Element => {
   const handleRestart = () => {
     setIndex(0);
     setEndQuiz(false);
+    setCorrect_number(0);
   };
 
   return (
     <div>
-      <div className="w-full mt-6 mb-5 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+      {/* progress bar */}
+      <div className="w-full mb-5 bg-gray-200 rounded-full h-1 dark:bg-gray-700">
         <div
           className="bg-blue-200 h-1 rounded-full "
           style={{ width: progress }}
@@ -85,15 +87,15 @@ const Quiz = (): JSX.Element => {
         </div>
       ) : (
         //quiz page
-        <div className="flex flex-col items-center justify-center ">
-          <div className="w-[600px] h-[100px] rounded-xl bg-slate-500 text-center">
-            {question?.question}
+        <div className="border border-gray-600 rounded-xl w-[700px] p-10 mx-auto mt-20 flex flex-col items-center justify-center ">
+          <div className="w-[600px] h-[100px] rounded-xl bg-slate-600 flex items-center justify-center">
+            <span>{question?.question}</span>
           </div>
-          <div className="grid grid-cols-2 gap-4 mt-10">
+          <div className="grid grid-cols-2 gap-[20px] mt-5 ">
             {question?.answers.map((answer) => (
               <div
                 ref={ans}
-                className="bg-slate-600 p-10 cursor-pointer rounded-lg w-[200px]"
+                className="bg-slate-600 text-center p-10 cursor-pointer w-[290px] rounded-lg "
                 key={answer}
                 onClick={(e: any) => handleClick(e)}
               >

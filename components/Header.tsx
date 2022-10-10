@@ -6,9 +6,9 @@ type Props = {};
 const Header = (props: Props) => {
   const router = useRouter();
   return (
-    <div className="flex items-center justify-between h-12 p-4 mt-4 ">
+    <div className="flex items-center justify-between h-12 border-b border-gray-500 bg-black p-10">
       <div className="cursor-pointer" onClick={(e) => router.push("/")}>
-        Trangs
+        Logo
       </div>
       <div className="rounded-2xl bg-slate-300 p-2 text-gray-800">
         <input
@@ -17,7 +17,7 @@ const Header = (props: Props) => {
           placeholder="Search"
         />
       </div>
-      <button className="bg-blue-400 p-2 rounded-lg hover:-translate-y-1 transition ease-in-out duration-300">
+      <button className="bg-blue-700 p-2 rounded-lg hover:-translate-y-1 transition ease-in-out duration-300">
         Login
       </button>
     </div>
