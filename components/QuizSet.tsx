@@ -19,13 +19,11 @@ const QuizSet = (): JSX.Element => {
       let response = await axios.get("/quizSet.json");
       setQuizSets((prev) => response.data);
     };
-    console.log(quizSets);
     fetchQuiz();
-  }, [quizSets]);
+  }, []);
 
   const handleClick = (id: string) => {
     router.push("/preview/" + id);
-    console.log(id);
   };
   return (
     <div className="p-20 flex items-center justify-center cursor-pointer">
