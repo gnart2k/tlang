@@ -16,7 +16,7 @@ const QuizSet = (): JSX.Element => {
   const [quizSets, setQuizSets] = useState<QuizSet[]>([]);
   useEffect(() => {
     const fetchQuiz = async () => {
-      let response = await axios.get("/api/quizset");
+      let response = await axios.get("/api/getquiz");
       setQuizSets((prev) => response.data);
     };
     fetchQuiz();
@@ -34,16 +34,26 @@ const QuizSet = (): JSX.Element => {
     router.push("/addsubject");
   };
   return (
-    <div className="">
-      <button onClick={addQuizSet} className="p-2 w-28 bg-blue-600 rounded-lg">
-        Add QuizSet
-      </button>
+    <div className="w-10/12">
+      <div className="w-11/12 grid justify-items-end">
+        <div>
+          <button
+            onClick={addQuizSet}
+            className="p-2 mr-2 w-28 bg-blue-600 rounded-lg"
+          >
+            Add QuizSet
+          </button>
 
-      <button onClick={addSubject} className="p-2 w-28 bg-blue-600 rounded-lg">
-        Add Subject
-      </button>
+          <button
+            onClick={addSubject}
+            className="p-2 w-28 bg-blue-600 rounded-lg"
+          >
+            Add Subject
+          </button>
+        </div>
+      </div>
       <div className=" flex items-center justify-center">
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-3 gap-2">
           {quizSets.map((quizSet) => (
             <div key={quizSet.id}>
               <div

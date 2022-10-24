@@ -12,7 +12,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const data = await prisma.Subject.findMany({
+  const data = await prisma.subject.findMany({
     take: 10,
   });
   res.status(200).json(data);

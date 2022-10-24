@@ -13,7 +13,7 @@ export default async function handler(
 ) {
   if (req.method === "POST") {
     const { title, authorEmail } = req.body;
-    const newSubject = await prisma.Subject.create({
+    const newSubject = await prisma.subject.create({
       data: {
         title: title,
       },

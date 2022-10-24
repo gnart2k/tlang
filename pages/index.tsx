@@ -8,7 +8,7 @@ import SubjectList from "../components/SubjectList";
 
 const Home: NextPage = (props) => {
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex justify-between w-full mt-10">
       <QuizSet />
       <SubjectList />
     </div>
