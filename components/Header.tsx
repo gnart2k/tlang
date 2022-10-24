@@ -12,7 +12,7 @@ type User = {
 type Props = {};
 
 const Header = (props: Props) => {
-  const { data } = useSession();
+  const {data } = useSession();
   const user = data?.user;
   const router = useRouter();
   return (

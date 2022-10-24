@@ -43,6 +43,7 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  quizSet       QuizSet[]
 }
 
 model VerificationToken {
@@ -51,4 +52,30 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model QuizSet{
+  id                 String    @id @default(cuid())
+  title             String
+  quizs quiz[]
+  authorEmail String
+  author User @relation(fields: [authorEmail], references: [email], onDelete: Cascade)
+  subjectID String
+  subject Subject @relation(fields: [subjectID], references: [id], onDelete: Cascade)
+}
+
+model quiz{
+  id String @id @default(cuid())
+  question String
+  correctAnswer String
+  incorrectAnswer String[]
+  subjectID String 
+  quizSet QuizSet @relation(fields: [subjectID], references: [id], onDelete: Cascade)
+}
+
+
+model Subject{
+  id String @id @default(cuid())
+  title String
+  quizSet QuizSet[]
 }

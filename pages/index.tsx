@@ -4,11 +4,13 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import QuizSet from "../components/QuizSet";
 import FlashCard from "./flashcard/[fid]";
+import SubjectList from "../components/SubjectList";
 
-const Home: NextPage = () => {
+const Home: NextPage = (props) => {
   return (
-    <div>
+    <div className="flex items-center justify-between">
       <QuizSet />
+      <SubjectList />
     </div>
   );
 };
