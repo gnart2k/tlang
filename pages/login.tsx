@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 
 type Props = {};
 
-const Login = (props: Props) => {
+const Login = (props) => {
   const { data } = useSession();
   const router = useRouter();
   useEffect(() => {
@@ -24,6 +24,7 @@ const Login = (props: Props) => {
         ) : (
           <div className=" flex items-center justify-center h-screen">
             <button
+              id="ggbtn"
               onClick={() => signIn("google")}
               className="border rounded-lg p-2"
             >

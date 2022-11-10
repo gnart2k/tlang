@@ -6,8 +6,8 @@ import Card from "../../components/Card";
 type Props = {};
 interface Card {
   id: string;
-  define?: string;
-  value?: string;
+  question?: string;
+  correctAnswer?: string;
   quizSetId?: string;
 }
 
@@ -15,7 +15,7 @@ const styles = {
   btn: "w-22 h-22 flex m-2 items-center justify-center p-4 cursor-pointer hover:bg-slate-600 rounded-[50%]",
 };
 
-export default function FlashCard({}: Card): JSX.Element {
+export default function FlashCard({}): JSX.Element {
   const router = useRouter();
   const { fid } = router.query;
 
@@ -28,10 +28,10 @@ export default function FlashCard({}: Card): JSX.Element {
   const [data, setData] = useState<Card[]>([]);
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get("/data.json");
-      setData((prev) =>
-        response.data.filter((item: Card) => item.quizSetId == fid)
-      );
+      const { fid } = router.query;
+      const url = "/api/quiz/" + fid;
+      const response = await axios.get(url);
+      setData((prev) => response.data);
     };
     fetchData();
   }, [fid]);
@@ -70,18 +70,18 @@ export default function FlashCard({}: Card): JSX.Element {
     <div className="flex flex-col justify-center items-center h-screen">
       <div className={cardStyle}>
         <Card
-          key={curCard?.define}
-          define={curCard?.define!}
-          value={curCard?.value!}
+          key={curCard?.id}
+          define={curCard?.question!}
+          value={curCard?.correctAnswer!}
         />
 
         {/* {data.map((item) => (
-          <Card key={item.define} define={item.define} value={item.value} />
+          <Card key={item.question} question={item.question} correctAnswer={item.correctAnswer} />
         ))} */}
       </div>
       {/* navigation */}
       <div className="flex">
-        <div className={styles.btn} onClick={(e: any) => nextCard(e)}>
+        <div className={styles.btn} id="prev" onClick={(e: any) => nextCard(e)}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -97,7 +97,7 @@ export default function FlashCard({}: Card): JSX.Element {
             />
           </svg>
         </div>
-        <div className={styles.btn} onClick={prevCard}>
+        <div className={styles.btn} id="next" onClick={prevCard}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

@@ -62,3 +62,15 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+input {
+  color: rgba(0, 0, 0, 0.7);
+}
+input:focus {
+  color: rgba(0, 0, 0, 0.7);
+  outline: none;
+}
+
+select:focus {
+  outline: none;
+}

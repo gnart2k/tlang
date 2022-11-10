@@ -16,13 +16,18 @@ const AddQuizSet = (props) => {
   const quizTitle = useRef<HTMLInputElement>(null);
   const subjectId = useRef<HTMLSelectElement>(null);
   const data = useSession();
-
+  const [status, setStatus] = useState<string>();
   const addQuiz = async () => {
-    await axios.post("api/quizset", {
+    const newQuiz = {
       title: quizTitle.current?.value,
       authorEmail: data.data?.user?.email,
       subjectID: subjectId.current?.value,
-    });
+    };
+    console.log(newQuiz);
+    const res = await axios.post("/api/quizset/a", newQuiz);
+    if (res.status === 200) {
+      setStatus("ok");
+    }
   };
   useEffect(() => {
     const fetchSubject = async () => {
@@ -32,19 +37,40 @@ const AddQuizSet = (props) => {
     fetchSubject();
   }, []);
   return (
-    <div className="text-gray-800">
-      <input type="text" ref={quizTitle} placeholder="title" />
-      <label htmlFor="subject">Subject</label>
-      <select id="subject" ref={subjectId} name="subject">
-        {subject.map((item, index) => (
-          <option key={index} value={item.id}>
-            {item.title}
-          </option>
-        ))}
-      </select>
-      <button className="p-2 bg-blue-400 rounded-lg" onClick={addQuiz}>
-        Add quiz
-      </button>
+    <div className="flex items-center justify-center mt-10 ">
+      <div className="flex flex-col items-center justify-center w-7/12 h-[600px] mt-8 bg-slate-700 p-4">
+        <input
+          type="text"
+          ref={quizTitle}
+          placeholder="title"
+          className="p-1 rounded-md"
+        />
+        <div className="mt-4 mb-4">
+          <label htmlFor="subject">Subject</label>
+          <select
+            id="subject"
+            ref={subjectId}
+            name="subject"
+            className="bg-slate-400 rounded-md ml-2 "
+          >
+            {subject.map((item, index) => (
+              <option key={index} value={item.id} className="">
+                {item.title}
+              </option>
+            ))}
+          </select>
+        </div>
+        <button className="p-2 bg-blue-400 rounded-lg" onClick={addQuiz}>
+          Add quiz
+        </button>
+        {status === "ok" ? (
+          <div className="text-green-400 mt-2 rounded-md">
+            Add successful !!
+          </div>
+        ) : (
+          <div className="text-red-400 mt-2 rounded-md">Something wrong !!</div>
+        )}
+      </div>
     </div>
   );
 };
